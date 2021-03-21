@@ -8,21 +8,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet"> 
   <style type="text/css" media="screen">
     @import url("/assets/css/style.css");
-  </style>  
+  </style>
+  <script src="../../assets/scripts/main.js"></script>
   <title>CaffeCalGo</title>
 </head>
 <body class="bg-image">
   <div class="mask-parent">
     <div class="bg-mask">
       <h1 class="title">CaffeCalGo: Calculate caffeine decay</h1>
-      <div>
-        <p>Enter the number of drinks.</p>
-        <input type="number">
+      <div class="drink-num">
+        <p>Enter the number of drinks or pills.</p>
+        <form action="/">
+          <input type="number" min="1" class="drinkNum" name="drinkNum">
+          <input type="submit">
+        </form>
       </div>
-      <div>
-        <p>Enter the time you took it.</p>
-        <input type="datetime-local">
+      <div id="Drinks">
+        {{.number}}
       </div>
+
     </div>
     
   </div>
