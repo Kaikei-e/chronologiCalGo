@@ -1,4 +1,4 @@
-module CaffeCalGo
+module caffecalgo
 
 go 1.16
 

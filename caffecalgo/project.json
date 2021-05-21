@@ -6,7 +6,7 @@
   "email": "kaikei-e@protonmail.com"
  },
  "version": "0.1.0",
- "binaryname": "CaffeCalGo",
+ "binaryname": "caffecalgo",
  "frontend": {
   "dir": "frontend",
   "install": "npm install",
