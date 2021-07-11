@@ -13,7 +13,9 @@ func main() {
 	router.LoadHTMLGlob("templates/*")
 	router.Static("/static", "static")
 
-	router.NoRoute(http.StatusMovedPermanently, )
+	router.NoRoute(func(c *gin.Context) {
+		c.Redirect(http.StatusMovedPermanently ,"/")
+	})
 	
 	router.GET("/", func (c *gin.Context)  {
 		c.HTML(http.StatusOK, "index.html", gin.H{
