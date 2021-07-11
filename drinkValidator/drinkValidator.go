@@ -11,7 +11,7 @@ import (
 )
 
 type CaffeLogger struct{
-	Number int `json:"numDrinks"`
+	Number int `json:"numOfDrinks"`
 	Method int `json:"calMethods"`
 	CaffeineMg int `json:"caffeMg"`
 	Amount int `json:"amount"`
@@ -50,6 +50,8 @@ func DrinkNum(ctx *gin.Context){
 	for i := 0; i < numOfDrinks; i++ {
 		logList = append(logList, CaffeLogger{i, 1, 0, 0, time.Now().Format("2006/01/23 23:45")})
 	}
+
+	
 
 	ctx.HTML(http.StatusOK, "drinks.html", gin.H{
 		"numOfDrinks": numOfDrinks,

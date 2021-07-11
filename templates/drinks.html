@@ -8,7 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CaffeCalGo</title>
   <link rel="stylesheet" href="/static/index.css">
-  <script src="/js/methodSelector.js"></script>
 </head>
 
 <body>
@@ -20,10 +19,10 @@
       <p>Don't worry about the time series, just enter the time as well.</p>
 
       <form action="/calculated" method="POST">
+        <input type="hidden" value="{{ .numOfDrinks }}" name="numOfDrinks">
         {{ range .logList }}
         <div>
-          <label>Drink number is {{.Number}}</label>
-          <input type="hidden" value="{{ .Number }}" name="numOfDrinks">
+          <label>Drink number is {{.Number }}</label>
           <input title="datetime{{ .Number }}" type="datetime-local" name="datetime{{ .Number }}" required>
           <select title="calMethods" name="calMethods{{.Number}}" id="calMethods{{.Number}}">
             <option value="1">Method 1</option>
