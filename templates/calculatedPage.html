@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CaffeCalGo</title>
+  <link rel="stylesheet" href="/static/index.css">
+</head>
+
+<body>
+  <div class="bg-image">
+    <div class="opaque-bg">
+      <form action="/drinks" method="POST">
+        <label class="input-form charStyle" >How many drinks did you take ? Max value is 10.</label>
+        <input class="input-form" type="number" required name="numOfDrinks">
+        {{ if .invalidValue }}
+        <p>Invalid value</p>
+        {{ end }}
+        <input class="input-form" type="submit">
+      </form>
+    </div>
+  </div>
+</body>
+
+<footer>
+  
+</footer>
+</html>

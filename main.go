@@ -1,6 +1,7 @@
 package main
 
 import (
+	"caffecalgo/calculator"
 	drinkvalidator "caffecalgo/drinkValidator"
 	"net/http"
 
@@ -25,7 +26,7 @@ func main() {
 	router.POST("/", drinkvalidator.DrinkNum)
 
 	router.POST("/drinks", drinkvalidator.DrinkNum)
-	//router.POST("/calculated", )
+	router.POST("/calculated", calculator.CaffeCalMethod)
 
 
   
