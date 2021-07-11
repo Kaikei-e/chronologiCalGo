@@ -8,24 +8,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CaffeCalGo</title>
   <link rel="stylesheet" href="/static/index.css">
+  <script src="/js/methodSelector.js"></script>
 </head>
 
 <body>
   <div class="bg-image">
     <div class="opaque-bg charStyle">
       <p>The drinks calculated are {{ .numOfDrinks }}</p>
-      <p>Method 1: Enter the total amount of caffeine. Method 2: Enter the amount of caffeine in mg per 100 ml.</p>
+      <p>Method 1: Enter the total amount of caffeine. Please ignore the "Drink amount" field on the right.</p>
+      <p>Method 2: Enter the amount of caffeine in mg per 100 ml and the total amount of the drink in the right column.</p>
       <p>Don't worry about the time series, just enter the time as well.</p>
 
-      <form>
+      <form action="/calculated" method="POST">
         {{ range .logList }}
         <div>
           <label>Drink number is {{.Number}}</label>
-          <select name="calMethods">
+          <input type="datetime-local" required>
+          <select name="calMethods" id="calMethods">
             <option value="1">Method 1</option>
             <option value="2">Method 2</option>
           </select>
-          <input type="number" name="caffeMg">  
+          <label>Caffeine mg : </label>
+          <input type="number" name="caffeMg{{.Number}}" min="0" required>
+          <label>Drink amount : </label>
+          <input type="number" name="amount{{.Number}}" min="0" required>
         </div>
         <br>
         {{ end }}
@@ -33,6 +39,7 @@
       </form>    
     </div>
   </div>
+
 </body>
 
 </html>

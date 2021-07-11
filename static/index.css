@@ -9,7 +9,7 @@ footer{
 }
 
 .charStyle{
-  color: rgb(61, 44, 21); 
+  color: rgb(255, 255, 255); 
   font-weight:bold;
 }
 
@@ -29,7 +29,7 @@ footer{
   
   height: 100%;
   padding: 30px;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(160, 123, 56, 0.61);
 }
 
 

@@ -22,10 +22,10 @@ func main() {
 
 		})
 	})
-
 	router.POST("/", drinkvalidator.DrinkNum)
 
 	router.POST("/drinks", drinkvalidator.DrinkNum)
+	//router.POST("/calculated", )
 
 
   
