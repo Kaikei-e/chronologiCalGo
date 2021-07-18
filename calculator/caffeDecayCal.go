@@ -40,7 +40,7 @@ func CaffeDecayCals(caffeLogs []drinkvalidator.CaffeLogger){
 		}else{
 			
 			if caffeLogs[i].Method == 1 {
-				calMethod1(caffeLogs[i], timeDuration[i + 1])
+				calTmax(caffeLogs[i], timeDuration[i + 1])
 			}else if (caffeLogs[i].Method == 2){
 				calMethod2(caffeLogs[i], timeDuration[i + 1])
 			}			
@@ -49,21 +49,37 @@ func CaffeDecayCals(caffeLogs []drinkvalidator.CaffeLogger){
 	}
 }
 
-func calMethod1(caffeStruct drinkvalidator.CaffeLogger, periodOfTime time.Duration){
+func calTmax(caffeStruct drinkvalidator.CaffeLogger, periodOfTime time.Duration) ([]caffeineDecay){
 	caffeineDecays := []caffeineDecay{}
 	minutes := int64(periodOfTime / time.Minute)
 	TmaxVar := 1.1333
 	var caffeDe caffeineDecay
 	caffeDe.decayTime = caffeStruct.Datetime
 
+
+
 	for i := 0; i < int(minutes); i++ {
+		if caffeDe.decayCaffe > float64(caffeStruct.CaffeineMg) {
+			break
+		}
+		if caffeStruct.Datetime.After(caffeDe.decayTime) {
+			break
+		}
 
 		caffeDe.decayCaffe += 1 * TmaxVar
-		caffeDe.decayTime.Add(time.Duration(1) * time.Minute)
+		caffeDe.decayTime = caffeDe.decayTime.Add(time.Duration(1) * time.Minute)
 
 		caffeineDecays = append(caffeineDecays, caffeDe)
-		//log.Println(caffeDe)
+		log.Println(caffeDe.decayCaffe)
+		log.Println(caffeDe.decayTime)
+		log.Println(caffeStruct.Datetime)
+
+
+		
+
 	}
+
+	return caffeineDecays
 }
 
 func calMethod2(caffeStruct drinkvalidator.CaffeLogger, periodOfTime time.Duration){
