@@ -2,7 +2,6 @@ package calculator
 
 import (
 	drinkvalidator "caffecalgo/drinkValidator"
-	"fmt"
 	"log"
 	"strconv"
 	"time"
@@ -17,8 +16,10 @@ func CaffeCalMethod(ctx *gin.Context) []drinkvalidator.CaffeLogger {
 
 
 	numOfDrinksStr := ctx.PostForm("numOfDrinks")
-
+	
 	numOfDrinks, err := strconv.Atoi(numOfDrinksStr)
+
+	log.Println(numOfDrinks)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
@@ -59,8 +60,6 @@ func CaffeCalMethod(ctx *gin.Context) []drinkvalidator.CaffeLogger {
 		caffeLogger.Datetime = datetimeTime
 
 		caffeLogs = append(caffeLogs, caffeLogger)
-
-		fmt.Println(caffeLogs[i])
 
 	}
 

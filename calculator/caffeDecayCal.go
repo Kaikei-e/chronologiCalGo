@@ -44,21 +44,15 @@ func CaffeDecayCals(caffeStructs []drinkvalidator.CaffeLogger){
 		if i == listLength - 2{
 			calMethodSimple(caffeStructs[i])
 		}else{
+			caffeDcays, isTmaxed = calTmax(caffeStructs[i], timeLimit[i + 1])
 
-			if caffeStructs[i].Method == 1 {
-				caffeDcays, isTmaxed = calTmax(caffeStructs[i], timeLimit[i + 1])
-
-				if isTmaxed {
-					timeLast := caffeDcays.caffeLists[len(caffeDcays.caffeLists) - 1].decayTime
-					calDecay(caffeStructs[i], caffeDcays, timeLast)
-					log.Println("check")
+			if isTmaxed {
+				timeLast := caffeDcays.caffeLists[len(caffeDcays.caffeLists) - 1].decayTime
+				calDecay(caffeStructs[i], caffeDcays, timeLast)
+				log.Println("check")
 
 
-					break
-				}else{
-				}
-			}else if (caffeStructs[i].Method == 2){
-				//calDecay(caffeLogs[i], timeDuration[i + 1])
+				break
 			}
 		}
 
@@ -135,5 +129,56 @@ func calDecay( caffeSt drinkvalidator.CaffeLogger, caffeDcays caffeineDecays, ti
 }
 
 func calMethodSimple(caffeStruct drinkvalidator.CaffeLogger){
+	var caffeDecays caffeineDecays
+	const TmaxVar = 1.1333
+	const startTmax = 1
+	var caffeDe caffeineDecay
+	caffeDe.decayTime = caffeStruct.Datetime
+	var amountOfCaffeine float64
+	const maxCount = 10000
+
+
+	if caffeStruct.Method == 2 {
+		amountOfCaffeine = float64(caffeStruct.Amount) / 100 * float64(caffeStruct.CaffeineMg)
+	}else{
+		amountOfCaffeine = float64(caffeStruct.CaffeineMg)
+	}
+
+	for i := 0; i < maxCount; i++ {
+		if caffeDe.decayCaffe > float64(amountOfCaffeine) {
+			break
+		}
+
+		caffeDe.decayCaffe += startTmax * TmaxVar
+		caffeDe.decayTime = caffeDe.decayTime.Add(time.Duration(1) * time.Minute)
+
+		caffeDecays.caffeLists = append(caffeDecays.caffeLists, caffeDe)
+		log.Println(i)
+		log.Println(caffeDe.decayCaffe)
+		log.Println(caffeDe.decayTime)
+		log.Println(caffeStruct.Datetime)
+
+	}
+
+	const decayRate = 0.99807
+
+	for i := 0; i < maxCount; i ++ {
+		if amountOfCaffeine < 5 {
+			break
+		}
+
+		amountOfCaffeine *= decayRate
+		log.Println(amountOfCaffeine)
+
+		caffeDe.decayCaffe = amountOfCaffeine
+		caffeDe.decayTime = caffeDe.decayTime.Add(time.Duration(1) * time.Minute)
+
+		caffeDecays.caffeLists = append(caffeDecays.caffeLists, caffeDe)
+
+		log.Println(caffeDe.decayCaffe)
+		log.Println(caffeDe.decayTime)
+
+	}
+
 
 }
